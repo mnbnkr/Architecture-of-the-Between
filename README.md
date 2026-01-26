@@ -1,4 +1,4 @@
-# The Architecture of the Between (first draft)
+# The Architecture of the Between (first draft with a few mistakes)
 ### Relational Constructive Stochastics and the Logic of Reality
 
 This repository contains the seminal text on **Relational Constructive Stochastics**. It presents a radical inversion of standard "Substantivalism" (the belief in discrete objects), arguing instead that reality is a seamless, infinite continuum where relations are ontologically prior to objects.
