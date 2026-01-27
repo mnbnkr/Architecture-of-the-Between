@@ -126,7 +126,7 @@
         letter-spacing: -0.04em;
         text-transform: uppercase;
         margin-bottom: 1rem;
-        word-spacing: -0.2em;
+        word-spacing: -0.22em;
         text-align: center;
       }
 
@@ -146,7 +146,7 @@
       /* Chapter Headers */
       .chapter-marker {
         font-family: var(--font-display);
-        font-size: 0.95rem;
+        font-size: 1.1rem;
         color: var(--accent);
         text-transform: uppercase;
         letter-spacing: 0.15em;
@@ -276,6 +276,20 @@
         mix-blend-mode: multiply;
       }
 
+      /* Plane 3: The Deep Substrate */
+      .continuum-plane:nth-child(3) {
+        /* Matches Plane 1 (Ink) but fainter and different grid size */
+        background-image:
+          linear-gradient(to right, var(--ink) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--ink) 1px, transparent 1px);
+
+        background-size: 80px 80px; /* Larger grid implies depth */
+        opacity: 0.1; /* Extremely subtle (vs 0.08 on Plane 1) */
+        z-index: -1; /* Places it behind the other two planes */
+
+        animation: drift-3 140s linear infinite; /* Very slow movement */
+      }
+
       /*
        * DARK MODE OVERRIDES FOR VISUAL
        */
@@ -314,12 +328,12 @@
           background-image:
             linear-gradient(
               to right,
-              rgba(255, 255, 255, 0.15) 1px,
+              rgba(255, 255, 255, 0.15) 2px,
               transparent 1px
             ),
             linear-gradient(
               to bottom,
-              rgba(255, 255, 255, 0.15) 1px,
+              rgba(255, 255, 255, 0.15) 2px,
               transparent 1px
             );
         }
@@ -338,6 +352,22 @@
         }
       }
 
+      .continuum-plane:nth-child(3) {
+        /* Dark mode specific: Faint white grid */
+        opacity: 0.25; /* Lower than Plane 1 (0.35) */
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.15) 2px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.15) 2px,
+            transparent 1px
+          );
+      }
+
       /* ANIMATIONS: The Arrow of Time (Rate of Change) */
       @keyframes drift-1 {
         0% {
@@ -354,6 +384,16 @@
         }
         100% {
           transform: rotateX(60deg) rotateZ(-3deg) translateX(-500px);
+        }
+      }
+
+      @keyframes drift-3 {
+        0% {
+          transform: rotateX(60deg) rotateZ(0deg) translate(0, 0);
+        }
+        100% {
+          /* Moves diagonally to create parallax against the other planes */
+          transform: rotateX(60deg) rotateZ(1deg) translate(-300px, -300px);
         }
       }
 
@@ -423,6 +463,7 @@
             class="visual-field"
             aria-label="Abstract representation of the Relational Continuum"
           >
+            <div class="continuum-plane"></div>
             <div class="continuum-plane"></div>
             <div class="continuum-plane"></div>
           </div>
