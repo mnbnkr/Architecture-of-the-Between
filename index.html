@@ -133,7 +133,7 @@
       h3.subtitle {
         font-family: var(--font-sans);
         font-weight: 400;
-        font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+        font-size: clamp(1.1rem, 1.2vw, 1.3rem);
         color: var(--ghost);
         margin-bottom: 3rem;
         padding-bottom: 1.5rem;
@@ -320,7 +320,7 @@
 
         .continuum-plane {
           /* Base opacity for the white/grey lines */
-          opacity: 0.35;
+          opacity: 0.45;
         }
 
         .continuum-plane:nth-child(1) {
@@ -339,13 +339,8 @@
         }
 
         .continuum-plane:nth-child(2) {
-          /*
-           * DARK MODE ONLY:
-           * Increase thickness to 2px to prevent red from disappearing.
-           * Use plus-lighter to make it glow/add light.
-           */
           mix-blend-mode: plus-lighter;
-          opacity: 0.5;
+          opacity: 0.3;
           background-image:
             linear-gradient(to right, var(--accent) 2px, transparent 2px),
             linear-gradient(to bottom, var(--accent) 2px, transparent 2px);
@@ -879,7 +874,7 @@
                 >
               </div>
               <div style="font-size: 0.8em; opacity: 0.5; margin-top: 0.2rem">
-                <em>Assisted by Gemini 3.0 Pro</em>
+                <em>assisted by Gemini 3.0 Pro</em>
               </div>
             </div>
           </footer>
