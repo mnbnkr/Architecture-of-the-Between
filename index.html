@@ -34,12 +34,16 @@
       /* DARK MODE (Automatic System Preference) */
       @media (prefers-color-scheme: dark) {
         :root {
-          --paper: #0a0a0a; /* Deep Void */
-          --ink: #e0e0e0; /* Off-White */
-          --ghost: #888888;
-          --accent: #ff5f5f; /* Hotter Red for contrast */
-          --grid-line: rgba(255, 255, 255, 0.08);
-          --noise-opacity: 0.03;
+          /*
+           * Adjusted: Lifted from pure black (#0a0a0a) to Carbon (#161616)
+           * Reduces eye strain/halation while keeping the void aesthetic.
+           */
+          --paper: #161616;
+          --ink: #e6e6e6; /* Softened White */
+          --ghost: #999999;
+          --accent: #ff6b6b; /* Lighter, pastel red for better readability */
+          --grid-line: rgba(255, 255, 255, 0.1);
+          --noise-opacity: 0.05;
         }
       }
 
@@ -73,7 +77,6 @@
 
       /*
        * TEXTURE: "The Stochastic Substrate"
-       * Refined: Very subtle high-frequency noise. Feels like film grain or high-quality paper.
        */
       body::before {
         content: "";
@@ -206,7 +209,6 @@
       /*
        * VISUAL: THE CONTINUUM ENGINE
        * Concept: Two infinite planes intersecting in 3D space.
-       * The "Object" is the interference pattern (Relation) created by their movement.
        */
       .visual-field {
         width: 100%;
@@ -216,7 +218,7 @@
         overflow: hidden;
         border-top: var(--border-thin);
         border-bottom: var(--border-thin);
-        background: var(--paper); /* Ensures solid backing */
+        background: var(--paper);
         perspective: 1000px; /* The 3D view */
 
         /* Fade edges to suggest infinity */
@@ -258,29 +260,81 @@
       /* Plane 1: The Base Field */
       .continuum-plane:nth-child(1) {
         animation: drift-1 80s linear infinite;
-        border: 1px solid var(--accent); /* Slight coloration hint */
+        border: 1px solid var(--accent);
       }
 
       /* Plane 2: The Relational Interference */
       .continuum-plane:nth-child(2) {
+        /* LIGHT MODE: Now uses --accent (Red) instead of --ink */
+        background-image:
+          linear-gradient(to right, var(--accent) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--accent) 1px, transparent 1px);
+
         background-size: 51px 51px; /* Moiré offset */
-        animation: drift-2 113s linear infinite; /* Prime duration to avoid loops */
-        opacity: 0.1;
-        mix-blend-mode: multiply; /* Darken intersection in light mode */
+        animation: drift-2 113s linear infinite;
+        opacity: 0.12; /* Slightly increased for red visibility on light */
+        mix-blend-mode: multiply;
       }
 
-      /* DARK MODE OVERRIDES FOR VISUAL */
+      /*
+       * DARK MODE OVERRIDES FOR VISUAL
+       */
       @media (prefers-color-scheme: dark) {
-        .continuum-plane {
-          /* In dark mode, lines are light (#e0e0e0), so we reduce opacity */
-          opacity: 0.15;
+        .visual-field {
+          /* Adds a subtle spotlight to give depth behind the grid */
+          background: radial-gradient(
+            circle at 50% 50%,
+            #252525 0%,
+            var(--paper) 80%
+          );
+          /* Loosen the mask slightly to let more of the grid show */
+          -webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent,
+            black 15%,
+            black 85%,
+            transparent
+          );
+          mask-image: linear-gradient(
+            to bottom,
+            transparent,
+            black 15%,
+            black 85%,
+            transparent
+          );
         }
-        .continuum-plane:nth-child(2) {
-          mix-blend-mode: screen; /* Lighten intersection in dark mode */
-          /* In dark mode, the second plane carries the accent color for "Energy" */
+
+        .continuum-plane {
+          /* Base opacity for the white/grey lines */
+          opacity: 0.35;
+        }
+
+        .continuum-plane:nth-child(1) {
+          /* Base grid is subtle white */
           background-image:
-            linear-gradient(to right, var(--accent) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--accent) 1px, transparent 1px);
+            linear-gradient(
+              to right,
+              rgba(255, 255, 255, 0.15) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              to bottom,
+              rgba(255, 255, 255, 0.15) 1px,
+              transparent 1px
+            );
+        }
+
+        .continuum-plane:nth-child(2) {
+          /*
+           * DARK MODE ONLY:
+           * Increase thickness to 2px to prevent red from disappearing.
+           * Use plus-lighter to make it glow/add light.
+           */
+          mix-blend-mode: plus-lighter;
+          opacity: 0.5;
+          background-image:
+            linear-gradient(to right, var(--accent) 2px, transparent 2px),
+            linear-gradient(to bottom, var(--accent) 2px, transparent 2px);
         }
       }
 
