@@ -1,5 +1,5 @@
 # The Architecture of the Between
-### Relational Constructive Stochastics and the Logic of Reality (Draft Rev. #3)
+### Relational Constructive Stochastics and the Logic of Reality (Draft Rev. #3.5)
 
 > "Things" do not have relationships; relationships manifest "things."
 
